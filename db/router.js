@@ -33,5 +33,5 @@ router
     // 获取用户信息
     .get('/admintoken', (req, res) => { admin.adminToken(req, res) })
     // 添加用户
-    .get('/addadmin', (req, res) => { admin.addAdmin(req, res) })
+    .post('/addadmin', (req, res) => { admin.addAdmin(req, res) })
 module.exports = router
