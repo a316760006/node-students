@@ -34,4 +34,6 @@ router
     .get('/admintoken', (req, res) => { admin.adminToken(req, res) })
     // 添加用户
     .post('/addadmin', (req, res) => { admin.addAdmin(req, res) })
+    // 用户修改
+    .post('/modifyadmin', (req, res) => { admin.modifyadmin(req, res) })
 module.exports = router

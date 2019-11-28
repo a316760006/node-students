@@ -9,6 +9,10 @@ let admin = Mongo({
         type: String,
         require: true
     },
+    name: {
+        type: String,
+        require: true
+    },
     password: {
         type: String,
         require: true
@@ -64,7 +68,9 @@ exports.adminToken = (req, res) => {
                         avatar: doc[0].avatar,
                         code: 20000,
                         level: doc[0].level,
-                        roles: doc[0].roles
+                        roles: doc[0].roles,
+                        username: doc[0].username,
+                        name: doc[0].name
                     });
                 }
             })
@@ -88,6 +94,20 @@ exports.addAdmin = (req, res) => {
             })
         } else {
             res.send('账号已存在');
+        }
+    })
+}
+// 用户修改`
+exports.modifyadmin = (req, res) => {
+    let data = req.body
+    let where = { password: data.password, username: data.username }
+    adminModel.find(where).then(doc => {
+        if (doc.length > 0) {
+            adminModel.updateOne(where, { $set: { password: data.newPassword } }).then(
+                res.send({ code: 200, mag: "修改成功" })
+            )
+        } else {
+            res.send('密码不正确')
         }
     })
 }
